@@ -1,1 +1,3 @@
-export default Ember.Route.extend({});
+var Index =  Ember.Route.extend({});
+
+export default Index;

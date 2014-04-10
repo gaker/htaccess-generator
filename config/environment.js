@@ -12,7 +12,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    // ENV.rootURL = '/static/htaccess/';
   }
 
   return JSON.stringify(ENV); // Set in index.html
