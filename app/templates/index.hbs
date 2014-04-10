@@ -1,0 +1,45 @@
+
+<h1>.htaccess Generator</h1>
+
+<p>Some copy here</p>
+
+{{#if hasResult}}
+  <div class="form-group">
+    <h2>Result</h2>
+    {{view Ember.TextArea valueBinding="result" class="form-control" viewName="result"}}
+  </div>
+{{/if}}
+
+<form method="POST" id="domain" {{action "domain" on="submit"}}>
+  <h2>Your domain</h2>
+    <div class="form-group">
+      {{view Ember.TextField valueBinding='domain' class='form-control' viewName='domain' name='domain' placeholder='Domain name (without www)'}}
+    </div>
+    <div class="checkbox">
+      <label>
+        {{view Ember.Checkbox valueBinding='www' viewName='www' name="www"}} Force www
+      </label>
+    </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+<form>
+
+
+
+{{!-- <form method="POST" {{action "expires"}}>
+  <h2>Add expires headers</h2>
+
+<form> --}}
+
+
+
+{{!-- <form method="POST" {{action "htpasswd" on="submit"}}>
+  <h2>Password protect</h2>
+  <div class="form-group">
+    {{view Ember.TextArea valueBinding='test' class='form-control' viewName='email' name='email' placeholder=""}}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form> --}}
+
+
+
