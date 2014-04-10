@@ -68,6 +68,7 @@ module.exports = function (broccoli) {
     'ember-resolver.js',
     'ember-shim.js',
     'bootstrap.js'
+    // 'validator.js/validator.js'
   ];
 
   var applicationJs = preprocessJs(appAndDependencies, '/', prefix);

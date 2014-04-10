@@ -2,8 +2,11 @@
 var IndexController = Ember.Controller.extend({
 
   hasResult: false,
+  rewrite: false,
+  result: '',
+  www: true,
   htpasswd: null,
-
+  errors: {},
 
   actions: {
     htpasswd: function () {
@@ -15,15 +18,46 @@ var IndexController = Ember.Controller.extend({
 
     // step one
     domain: function () {
-      console.log(this.getProperties('domain', 'www'));
       var domain = this.get('domain'),
-          forceWWW = this.get('www');
+          www = this.get('www');
+
+      this.set('errors.domain', null);
+
+      if (domain === '' || domain === undefined) {
+        this.set('errors.domain', 'Please enter a valid domain');
+        return false;
+      }
+
+      domain = domain.toLowerCase();
+
+      // Get rid of https?://
+      if ((/^https?:\/\//).test(domain)) {
+        domain = domain.substr(domain.indexOf('://') + 3);
+      }
+
+      //  Make sure www isn't in the URL
+      if (domain.substr(0,4) === 'www.') {
+        domain = domain.substr(4);
+      }
+
       this.set('domain', domain);
+      this.set('www', www);
 
-      // console.log(forceWWW);
+      this.set('rewrite', true);
+      this.set('hasResult', true);
 
-      // window.console.log(this.get('domain'));
+      $('#domain').hide();
+      $('#expires').show();
+    },
+
+    // expires headers
+    expires: function () {
+      this.set('errors.expires', null);
+      this.set('expires', true);
+
+      $('#expires').hide();
     }
+
   }
 
 });
