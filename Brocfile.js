@@ -67,8 +67,8 @@ module.exports = function (broccoli) {
     'ember-data.js',
     'ember-resolver.js',
     'ember-shim.js',
-    'bootstrap.js'
-    // 'validator.js/validator.js'
+    'bootstrap.js',
+    'validator.js'
   ];
 
   var applicationJs = preprocessJs(appAndDependencies, '/', prefix);
@@ -95,11 +95,9 @@ module.exports = function (broccoli) {
   }
 
   // Styles
-
   var styles = preprocessCss(appAndDependencies, prefix + '/styles', '/assets');
 
   // Ouput
-
   var outputTrees = [
     indexHTML,
     applicationJs,

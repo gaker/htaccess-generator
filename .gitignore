@@ -10,6 +10,7 @@
 !/vendor/ember-shim.js
 !/vendor/qunit-shim.js
 !/vendor/_loader.js
+!/vendor/validator.js
 
 # misc
 /.sass-cache

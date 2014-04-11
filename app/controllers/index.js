@@ -1,12 +1,25 @@
 
+import rewrite from 'htaccess/helpers/rewrite';
+
 var IndexController = Ember.Controller.extend({
 
   hasResult: false,
-  rewrite: false,
-  result: '',
+  domain: null,
+  rewrite: rewrite,
+  rewriteRule: false,
   www: true,
   htpasswd: null,
   errors: {},
+
+  selectedPlatform: null,
+  platforms: [
+    {id: 1, name: 'WordPress'},
+    {id: 2, name: 'Zend Framework'},
+    {id: 3, name: 'Drupal'},
+    {id: 4, name: 'Laravel'},
+    {id: 5, name: 'Craft CMS'},
+    {id: 6, name: 'ExpressionEngine/CodeIgniter'}
+  ],
 
   actions: {
     htpasswd: function () {
@@ -16,6 +29,23 @@ var IndexController = Ember.Controller.extend({
       this.set('hasResult', true);
     },
 
+    // Reset everything.
+    reset: function () {
+
+      var conf = confirm('Are you sure?');
+
+      if (conf === true) {
+        this.set('hasResult', false);
+        this.set('rewriteRule', false);
+        this.set('www', true);
+        this.set('htpasswd', null);
+        this.set('expires', false);
+        this.set('errors', {});
+        this.set('domain', null);
+        this.set('selectedPlatform', null);
+      }
+    },
+
     // step one
     domain: function () {
       var domain = this.get('domain'),
@@ -23,7 +53,7 @@ var IndexController = Ember.Controller.extend({
 
       this.set('errors.domain', null);
 
-      if (domain === '' || domain === undefined) {
+      if (domain === '' || domain === undefined || ! validator.isURL(domain)) {
         this.set('errors.domain', 'Please enter a valid domain');
         return false;
       }
@@ -43,21 +73,27 @@ var IndexController = Ember.Controller.extend({
       this.set('domain', domain);
       this.set('www', www);
 
-      this.set('rewrite', true);
+      this.set('rewriteRule', true);
       this.set('hasResult', true);
-
-      $('#domain').hide();
-      $('#expires').show();
     },
 
     // expires headers
     expires: function () {
       this.set('errors.expires', null);
       this.set('expires', true);
+    },
 
-      $('#expires').hide();
+    cancelExpires: function () {
+      this.set('expires', false);
+    },
+
+    remove_index: function () {
+
+    },
+
+    cancelRemoveIndex: function () {
+      this.set('selectedPlatform', null);
     }
-
   }
 
 });

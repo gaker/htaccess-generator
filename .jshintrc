@@ -9,7 +9,9 @@
     "DS": true,
     "$": true,
     "ENV": true,
-    "module": true
+    "module": true,
+    "console": true,
+    "confirm": true
   },
   "node" : false,
   "browser" : false,

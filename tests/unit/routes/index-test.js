@@ -1,3 +1,5 @@
 
 import {test, moduleFor} from 'ember-qunit';
-// import Index from 'app/routes/index';
+// import Index from 'htaccess/routes/index';
+
+// App.IndexRoute;

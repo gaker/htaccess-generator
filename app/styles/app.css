@@ -30,7 +30,7 @@ body {
 
 .container {
   width: auto;
-  max-width: 680px;
+  /*margin-bottom: 25px;*/
   padding: 0 15px;
 }
 .container .text-muted {

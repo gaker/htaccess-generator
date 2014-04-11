@@ -1,41 +1,39 @@
-
 <pre>
+
 
 &lt;IfModule mod_rewrite.c>
     RewriteEngine On
-    {{#if www}}
+    {{#if domain}}{{#if www}}
     # Force www
     RewriteCond %{HTTP_HOST} !^www.{{domain}}$ [NC]
-    RewriteRule ^(.*)$ http://www.{{domain}}$1 [R=301,L]
-    {{else}}
-    RewriteCond %{HTTP_HOST} ^www.{{domain}}$ [NC]
+    RewriteRule ^(.*)$ http://www.{{domain}}$1 [R=301,L]{{else}}
+    # Remove www
+    RewriteCond %{HTTP_HOST} !^{{domain}}$ [NC]
     RewriteRule ^(.*)$ http://{{domain}}$1 [R=301,L]{{/if}}
+    {{/if}}
+{{#if selectedPlatform}}    # {{selectedPlatform.name}} URL Rewrite
+    {{rewrite selectedPlatform}}{{/if}}
 &lt;/IfModule>
 
 {{#if expires}}
 &lt;IfModule mod_expires.c>
     ExpiresActive On
 
-    ExpiresDefault "access plus 10 years"
-
+    ExpiresDefault "access plus 2 hours"
 
     ExpiresByType text/html "access plus 1 second"
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType image/gif "access plus 1 month"
-    ExpiresByType image/png "access plus 1 month"
-    ExpiresByType image/jpg "access plus 1 month"
-    ExpiresByType image/jpeg "access plus 1 month"
-    ExpiresByType text/javascript "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
-    ExpiresByType application/pdf "access plus 1 month"
-    ExpiresByType application/x-download "access plus 1 month"
-    ExpiresByType application/x-javascript "access plus 1 month"
-    ExpiresByType application/x-shockwave-flash "access plus 1 month"
+    ExpiresByType text/css "access plus 2 hours"
+    ExpiresByType image/gif "access plus 2 hours"
+    ExpiresByType image/png "access plus 2 hours"
+    ExpiresByType image/jpg "access plus 2 hours"
+    ExpiresByType image/jpeg "access plus 2 hours"
+    ExpiresByType text/javascript "access plus 2 hours"
+    ExpiresByType application/javascript "access plus 2 hours"
+    ExpiresByType application/pdf "access plus 2 hours"
+    ExpiresByType application/x-download "access plus 2 hours"
+    ExpiresByType application/x-javascript "access plus 2 hours"
+    ExpiresByType application/x-shockwave-flash "access plus 2 hours"
 &lt;/IfModule>
 
 {{/if}}
-
-
-{{!-- .htpasswd --}}
-
 </pre>
